@@ -7,7 +7,8 @@ TShock is a toolbox for Terraria servers and communities. That toolbox is jam pa
 
 * Download: [Stable](https://github.com/TShock/TShock/releases) or [Experimental](https://travis.tshock.co/).
 * Read [the documentation](https://tshock.readme.io/) to quickly get up to speed.
-* Join [Discord](https://discord.gg/XUJdH58) to get help, chat, and enjoy some swell Australian company.
+* Join [Discord](https://discord.gg/Cav9nYX) for quick questions and answers
+* Join [Telegram](https://t.me/pryaxis) for in-depth support, conversation, and some swell Australian company.
 * Download [other plugins](https://tshock.co/xf/index.php?resources/) to supercharge your server.
 
 ----
@@ -122,7 +123,7 @@ You need to re-run the patcher any time `OTAPI` updates. You need to rebuild `Te
 
 ##### TShock
 
-1. Open the `TShockAPI.sln` solution in the root of the repository.
+1. Open the `TShock.sln` solution in the root of the repository.
 
 1. Build the solution. It should correctly download NuGet packages automatically and build against the aforementioned `TerrariaServerAPI` project you just built.
 
@@ -155,9 +156,10 @@ You need to re-run the patcher any time `OTAPI` updates. You need to rebuild `Te
 
 1. You need to get NuGet. Download the latest `nuget.exe` from [NuGet](https://www.nuget.org/downloads).
 
-1. Make a `~/bin` folder if you don't have one.
+1. Make a `~/bin` folder if you don't have one. Then, put `nuget.exe` inside it.
 
           $ mkdir ~/bin/
+          $ cp ~/downloads/nuget.exe ~/bin/
 
 1. Set an environment variable to store if you plan to build in debug or release.
 
@@ -213,7 +215,7 @@ You might find yourself wondering where these fields are. Pryaxis provides the d
 
 Finally, you may be interested in developing other Terraria Server API plugins. The [TShockResources](https://github.com/TShockResources) organization has several plugins you can look at and build on. TShock is itself a plugin, and most plugins are open source. This gives you ample room to figure out where to go next.
 
-Need help? Join us on [#tshock-programming in Discord](https://discord.gg/ABtrBaY).
+Need help? Join us on [Telegram](https://t.me/pryaxis) or [Discord](https://discord.gg/Cav9nYX).
 
 ## Code of Conduct
 
