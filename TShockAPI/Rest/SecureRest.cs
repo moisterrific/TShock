@@ -204,7 +204,8 @@ namespace Rests
 			//This should solve that
 			if (Main.rand == null)
 			{
-				Main.rand = new Terraria.Utilities.UnifiedRandom();
+//				Main.rand = new Terraria.Utilities.UnifiedRandom();
+				Main.rand = new Random((int)DateTime.Now.Ticks);
 			}
 
 			object result = secureCmd.Execute(verbs, parms, tokenData, request, context);

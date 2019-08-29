@@ -123,9 +123,9 @@ namespace TShockAPI.Sockets
 			}
 		}
 
-		void ISocket.SendQueuedPackets()
-		{
-		}
+//		void ISocket.SendQueuedPackets()
+//		{
+//		}
 
 		void ISocket.AsyncSend(byte[] data, int offset, int size, SocketSendCallback callback, object state)
 		{

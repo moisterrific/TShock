@@ -514,10 +514,10 @@ namespace TShockAPI
 			{
 				HelpText = "Toggles spawn protection."
 			});
-			add(new Command(Permissions.sandstorm, Sandstorm, "sandstorm")
-			{
-				HelpText = "Toggles sandstorms."
-			});
+//			add(new Command(Permissions.sandstorm, Sandstorm, "sandstorm")
+//			{
+//				HelpText = "Toggles sandstorms."
+//			});
 			add(new Command(Permissions.rain, Rain, "rain")
 			{
 				HelpText = "Toggles the rain."
@@ -1317,7 +1317,7 @@ namespace TShockAPI
 							args.Player.SendMultipleMatchError(players.Select(p => p.Name));
 							return;
 						}
-						
+
 						UserAccount offlineUserAccount = TShock.UserAccounts.GetUserAccountByName(args.Parameters[1]);
 
 						// Storage variable to determine if the command executor is the server console
@@ -1338,8 +1338,8 @@ namespace TShockAPI
 							if (args.Parameters[2] != "0")
 							{
 								parsedOkay = TShock.Utils.TryParseTime(args.Parameters[2], out banLengthInSeconds);
-							} 
-							else 
+							}
+							else
 							{
 								parsedOkay = true;
 							}
@@ -1409,8 +1409,8 @@ namespace TShockAPI
 									args.Player.SendErrorMessage("Note: An account named with this IP address also exists.");
 									args.Player.SendErrorMessage("Note: It will also be banned.");
 								}
-							} 
-							else 
+							}
+							else
 							{
 								// Apparently there is no way to not IP ban someone
 								// This means that where we would normally just ban a "character name" here
@@ -1435,7 +1435,7 @@ namespace TShockAPI
 							// This needs to be fixed in a future implementation.
 							targetGeneralizedName = offlineUserAccount.Name;
 
-							if (TShock.Groups.GetGroupByName(offlineUserAccount.Group).HasPermission(Permissions.immunetoban) && 
+							if (TShock.Groups.GetGroupByName(offlineUserAccount.Group).HasPermission(Permissions.immunetoban) &&
 								!callerIsServerConsole)
 							{
 								args.Player.SendErrorMessage("Permission denied. Target {0} is immune to ban.", targetGeneralizedName);
@@ -1450,7 +1450,7 @@ namespace TShockAPI
 
 							string lastIP = JsonConvert.DeserializeObject<List<string>>(offlineUserAccount.KnownIps).Last();
 
-							success = 
+							success =
 								TShock.Bans.AddBan(lastIP,
 									"", offlineUserAccount.UUID, offlineUserAccount.Name, banReason, false, args.Player.Account.Name,
 									banLengthInSeconds == 0 ? "" : DateTime.UtcNow.AddSeconds(banLengthInSeconds).ToString("s"));
@@ -2075,7 +2075,7 @@ namespace TShockAPI
 						TSPlayer.Server.SetPumpkinMoon(true);
 						Main.bloodMoon = false;
 						NPC.waveKills = 0f;
-						NPC.waveNumber = wave;
+//						NPC.waveNumber = wave;
 						TSPlayer.All.SendInfoMessage("{0} started the pumpkin moon at wave {1}!", args.Player.Name, wave);
 						break;
 
@@ -2093,7 +2093,7 @@ namespace TShockAPI
 						TSPlayer.Server.SetFrostMoon(true);
 						Main.bloodMoon = false;
 						NPC.waveKills = 0f;
-						NPC.waveNumber = wave;
+//						NPC.waveNumber = wave;
 						TSPlayer.All.SendInfoMessage("{0} started the frost moon at wave {1}!", args.Player.Name, wave);
 						break;
 
@@ -2104,11 +2104,11 @@ namespace TShockAPI
 						break;
 				}
 			}
-			else if (DD2Event.Ongoing)
-			{
-				DD2Event.StopInvasion();
-				TSPlayer.All.SendInfoMessage("{0} has ended the Old One's Army event.", args.Player.Name);
-			}
+//			else if (DD2Event.Ongoing)
+//			{
+//				DD2Event.StopInvasion();
+//				TSPlayer.All.SendInfoMessage("{0} has ended the Old One's Army event.", args.Player.Name);
+//			}
 			else
 			{
 				TSPlayer.All.SendInfoMessage("{0} has ended the invasion.", args.Player.Name);
@@ -2137,7 +2137,7 @@ namespace TShockAPI
 			else
 			{
 				Main.anglerWhoFinishedToday.Clear();
-				NetMessage.SendAnglerQuest(-1);
+				NetMessage.SendAnglerQuest();
 				args.Player.SendSuccessMessage("Cleared all users from the angler quest completion list for today.");
 			}
 		}
@@ -3989,29 +3989,29 @@ namespace TShockAPI
 			}
 		}
 
-		private static void Sandstorm(CommandArgs args)
-		{
-			if (args.Parameters.Count < 1)
-			{
-				args.Player.SendErrorMessage("Invalid syntax! Proper syntax: {0}sandstorm <stop/start>", Specifier);
-				return;
-			}
-
-			switch (args.Parameters[0].ToLowerInvariant())
-			{
-				case "start":
-					Terraria.GameContent.Events.Sandstorm.StartSandstorm();
-					TSPlayer.All.SendInfoMessage("{0} started a sandstorm.", args.Player.Name);
-					break;
-				case "stop":
-					Terraria.GameContent.Events.Sandstorm.StopSandstorm();
-					TSPlayer.All.SendInfoMessage("{0} stopped the sandstorm.", args.Player.Name);
-					break;
-				default:
-					args.Player.SendErrorMessage("Invalid syntax! Proper syntax: {0}sandstorm <stop/start>", Specifier);
-					break;
-			}
-		}
+//		private static void Sandstorm(CommandArgs args)
+//		{
+//			if (args.Parameters.Count < 1)
+//			{
+//				args.Player.SendErrorMessage("Invalid syntax! Proper syntax: {0}sandstorm <stop/start>", Specifier);
+//				return;
+//			}
+//
+//			switch (args.Parameters[0].ToLowerInvariant())
+//			{
+//				case "start":
+//					Terraria.GameContent.Events.Sandstorm.StartSandstorm();
+//					TSPlayer.All.SendInfoMessage("{0} started a sandstorm.", args.Player.Name);
+//					break;
+//				case "stop":
+//					Terraria.GameContent.Events.Sandstorm.StopSandstorm();
+//					TSPlayer.All.SendInfoMessage("{0} stopped the sandstorm.", args.Player.Name);
+//					break;
+//				default:
+//					args.Player.SendErrorMessage("Invalid syntax! Proper syntax: {0}sandstorm <stop/start>", Specifier);
+//					break;
+//			}
+//		}
 
 		private static void Rain(CommandArgs args)
 		{
@@ -4623,7 +4623,7 @@ namespace TShockAPI
 								args.Player.SendErrorMessage("Region \"{0}\" already exists.", newName);
 								break;
 							}
-							
+
 							if(TShock.Regions.RenameRegion(oldName, newName))
 							{
 								args.Player.SendInfoMessage("Region renamed successfully!");
@@ -5481,7 +5481,7 @@ namespace TShockAPI
 				if (Main.npc[i].active && ((npcId == 0 && !Main.npc[i].townNPC) || (Main.npc[i].netID == npcId && Main.npc[i].townNPC)))
 				{
 					Main.npc[i].GivenName = args.Parameters[1];
-					NetMessage.SendData(56, -1, -1, NetworkText.FromLiteral(args.Parameters[1]), i, 0f, 0f, 0f, 0);
+					NetMessage.SendData(56, -1, -1, args.Parameters[1], i, 0f, 0f, 0f, 0);
 					done++;
 				}
 			}

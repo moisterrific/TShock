@@ -160,10 +160,10 @@ namespace TShockAPI
 		{
 			// Main.rand is thread static.
 			if (Main.rand == null)
-				Main.rand = new UnifiedRandom();
+				Main.rand = new Random((int)DateTime.Now.Ticks);
 
 			Main.npc[npcid].StrikeNPC(damage, knockBack, hitDirection);
-			NetMessage.SendData((int)PacketTypes.NpcStrike, -1, -1, NetworkText.Empty, npcid, damage, knockBack, hitDirection);
+			NetMessage.SendData((int)PacketTypes.NpcStrike, -1, -1, "", npcid, damage, knockBack, hitDirection);
 		}
 
 		public void RevertTiles(Dictionary<Vector2, ITile> tiles)

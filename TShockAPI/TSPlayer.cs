@@ -359,7 +359,7 @@ namespace TShockAPI
 			Item[] miscDyes = TPlayer.miscDyes;
 			Item[] piggy = TPlayer.bank.item;
 			Item[] safe = TPlayer.bank2.item;
-			Item[] forge = TPlayer.bank3.item;
+//			Item[] forge = TPlayer.bank3.item;
 			Item trash = TPlayer.trashItem;
 			for (int i = 0; i < NetItem.MaxInventory; i++)
 			{
@@ -528,23 +528,23 @@ namespace TShockAPI
 				else
 				{
 					// 220
-					var index = i - NetItem.ForgeIndex.Item1;
-					Item item = new Item();
-					if (forge[index] != null && forge[index].netID != 0)
-					{
-						item.netDefaults(forge[index].netID);
-						item.Prefix(forge[index].prefix);
-						item.AffixName();
-
-						if (forge[index].stack > item.maxStack || forge[index].stack < 0)
-						{
-							check = true;
-							if (shouldWarnPlayer)
-							{
-								SendErrorMessage("Stack cheat detected. Remove Defender's Forge item {0} ({1}) and then rejoin.", item.Name, forge[index].stack);
-							}
-						}
-					}
+//					var index = i - NetItem.ForgeIndex.Item1;
+//					Item item = new Item();
+//					if (forge[index] != null && forge[index].netID != 0)
+//					{
+//						item.netDefaults(forge[index].netID);
+//						item.Prefix(forge[index].prefix);
+//						item.AffixName();
+//
+//						if (forge[index].stack > item.maxStack || forge[index].stack < 0)
+//						{
+//							check = true;
+//							if (shouldWarnPlayer)
+//							{
+//								SendErrorMessage("Stack cheat detected. Remove Defender's Forge item {0} ({1}) and then rejoin.", item.Name, forge[index].stack);
+//							}
+//						}
+//					}
 
 				}
 			}
@@ -1125,7 +1125,7 @@ namespace TShockAPI
 
 			SendTileSquare((int)(x / 16), (int)(y / 16), 15);
 			TPlayer.Teleport(new Vector2(x, y), style);
-			NetMessage.SendData((int)PacketTypes.Teleport, -1, -1, NetworkText.Empty, 0, TPlayer.whoAmI, x, y, style);
+			NetMessage.SendData((int)PacketTypes.Teleport, -1, -1, "", 0, TPlayer.whoAmI, x, y, style);
 			return true;
 		}
 
@@ -1135,7 +1135,7 @@ namespace TShockAPI
 		/// <param name="health">Heal health amount.</param>
 		public void Heal(int health = 600)
 		{
-			NetMessage.SendData((int)PacketTypes.PlayerHealOther, -1, -1, NetworkText.Empty, this.TPlayer.whoAmI, health);
+			NetMessage.SendData((int)PacketTypes.PlayerHealOther, -1, -1, "", this.TPlayer.whoAmI, health);
 		}
 
 		/// <summary>
@@ -1234,7 +1234,7 @@ namespace TShockAPI
 			}
 		}
 
-		/// <summary>Sends a tile square at a location with a given size. 	
+		/// <summary>Sends a tile square at a location with a given size.
 		/// Typically used to revert changes by Bouncer through sending the
 		/// "old" version of modified data back to a client.
 		/// Prevents desync issues.
@@ -1431,7 +1431,7 @@ namespace TShockAPI
 				}
 				return;
 			}
-			SendData(PacketTypes.SmartTextMessage, msg, 255, red, green, blue, -1);
+			SendData(PacketTypes.ChatText, msg, 16, red, green, blue, -1);
 		}
 
 		/// <summary>
@@ -1453,7 +1453,7 @@ namespace TShockAPI
 				}
 				return;
 			}
-			SendDataFromPlayer(PacketTypes.SmartTextMessage, ply, msg, red, green, blue, -1);
+			SendDataFromPlayer(PacketTypes.ChatText, ply, msg, red, green, blue, -1);
 		}
 
 		/// <summary>
@@ -1499,7 +1499,7 @@ namespace TShockAPI
 		/// <param name="damage">The amount of damage the player will take.</param>
 		public virtual void DamagePlayer(int damage)
 		{
-			NetMessage.SendPlayerHurt(Index, PlayerDeathReason.LegacyDefault(), damage, (new Random()).Next(-1, 1), false, false, 0, -1, -1);
+			NetMessage.SendData(26, -1, -1, "", Index, (new Random()).Next(-1, 1), damage);
 		}
 
 		/// <summary>
@@ -1507,7 +1507,7 @@ namespace TShockAPI
 		/// </summary>
 		public virtual void KillPlayer()
 		{
-			NetMessage.SendPlayerDeath(Index, PlayerDeathReason.LegacyDefault(), 99999, (new Random()).Next(-1, 1), false, -1, -1);
+			NetMessage.SendData(44, -1, -1, "", Index, (new Random()).Next(-1, 1), 99999, 0);
 		}
 
 		/// <summary>
@@ -1517,7 +1517,7 @@ namespace TShockAPI
 		public virtual void SetTeam(int team)
 		{
 			Main.player[Index].team = team;
-			NetMessage.SendData((int)PacketTypes.PlayerTeam, -1, -1, NetworkText.Empty, Index);
+			NetMessage.SendData((int)PacketTypes.PlayerTeam, -1, -1, "", Index);
 		}
 
 		private DateTime LastDisableNotification = DateTime.UtcNow;
@@ -1643,7 +1643,7 @@ namespace TShockAPI
 		public void SendMultipleMatchError(IEnumerable<object> matches)
 		{
 			SendErrorMessage("More than one match found: ");
-			
+
 			var lines = PaginationTools.BuildLinesFromTerms(matches.ToArray());
 			lines.ForEach(SendInfoMessage);
 
@@ -1708,7 +1708,7 @@ namespace TShockAPI
 			if (RealPlayer && !ConnectionAlive)
 				return;
 
-			NetMessage.SendData((int)msgType, Index, -1, NetworkText.FromLiteral(text), number, number2, number3, number4, number5);
+			NetMessage.SendData((int)msgType, Index, -1, text, number, number2, number3, number4, number5);
 		}
 
 		/// <summary>
@@ -1727,7 +1727,7 @@ namespace TShockAPI
 			if (RealPlayer && !ConnectionAlive)
 				return;
 
-			NetMessage.SendData((int)msgType, Index, -1, NetworkText.FromFormattable(text), ply, number2, number3, number4, number5);
+			NetMessage.SendData((int)msgType, Index, -1, text, ply, number2, number3, number4, number5);
 		}
 
 		/// <summary>

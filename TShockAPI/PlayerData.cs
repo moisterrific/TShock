@@ -16,6 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using System;
 using Microsoft.Xna.Framework;
 using Terraria;
 using TShockAPI;
@@ -119,7 +120,7 @@ namespace TShockAPI
 			Item[] miscDyes = player.TPlayer.miscDyes;
 			Item[] piggy = player.TPlayer.bank.item;
 			Item[] safe = player.TPlayer.bank2.item;
-			Item[] forge = player.TPlayer.bank3.item;
+//			Item[] forge = player.TPlayer.bank3.item;
 			Item trash = player.TPlayer.trashItem;
 
 			for (int i = 0; i < NetItem.MaxInventory; i++)
@@ -173,9 +174,9 @@ namespace TShockAPI
 				else
 				{
 					//220
-					var index = i - NetItem.ForgeIndex.Item1;
-					this.inventory[i] = (NetItem)forge[index];
-					
+//					var index = i - NetItem.ForgeIndex.Item1;
+//					this.inventory[i] = (NetItem)forge[index];
+
 				}
 			}
 		}
@@ -326,114 +327,114 @@ namespace TShockAPI
 				else
 				{
 					//220
-					var index = i - NetItem.ForgeIndex.Item1;
-					player.TPlayer.bank3.item[index].netDefaults(this.inventory[i].NetId);
+//					var index = i - NetItem.ForgeIndex.Item1;
+//					player.TPlayer.bank3.item[index].netDefaults(this.inventory[i].NetId);
+//
+//					if (player.TPlayer.bank3.item[index].netID != 0)
+//					{
+//						player.TPlayer.bank3.item[index].stack = this.inventory[i].Stack;
+//						player.TPlayer.bank3.item[index].Prefix((byte)this.inventory[i].PrefixId);
+//					}
 
-					if (player.TPlayer.bank3.item[index].netID != 0)
-					{
-						player.TPlayer.bank3.item[index].stack = this.inventory[i].Stack;
-						player.TPlayer.bank3.item[index].Prefix((byte)this.inventory[i].PrefixId);
-					}
-					
 				}
 			}
 
 			float slot = 0f;
 			for (int k = 0; k < NetItem.InventorySlots; k++)
 			{
-				NetMessage.SendData(5, -1, -1, NetworkText.FromLiteral(Main.player[player.Index].inventory[k].Name), player.Index, slot, (float)Main.player[player.Index].inventory[k].prefix);
+				NetMessage.SendData(5, -1, -1, Main.player[player.Index].inventory[k].Name, player.Index, slot, (float)Main.player[player.Index].inventory[k].prefix);
 				slot++;
 			}
 			for (int k = 0; k < NetItem.ArmorSlots; k++)
 			{
-				NetMessage.SendData(5, -1, -1, NetworkText.FromLiteral(Main.player[player.Index].armor[k].Name), player.Index, slot, (float)Main.player[player.Index].armor[k].prefix);
+				NetMessage.SendData(5, -1, -1, Main.player[player.Index].armor[k].Name, player.Index, slot, (float)Main.player[player.Index].armor[k].prefix);
 				slot++;
 			}
 			for (int k = 0; k < NetItem.DyeSlots; k++)
 			{
-				NetMessage.SendData(5, -1, -1, NetworkText.FromLiteral(Main.player[player.Index].dye[k].Name), player.Index, slot, (float)Main.player[player.Index].dye[k].prefix);
+				NetMessage.SendData(5, -1, -1, Main.player[player.Index].dye[k].Name, player.Index, slot, (float)Main.player[player.Index].dye[k].prefix);
 				slot++;
 			}
 			for (int k = 0; k < NetItem.MiscEquipSlots; k++)
 			{
-				NetMessage.SendData(5, -1, -1, NetworkText.FromLiteral(Main.player[player.Index].miscEquips[k].Name), player.Index, slot, (float)Main.player[player.Index].miscEquips[k].prefix);
+				NetMessage.SendData(5, -1, -1, Main.player[player.Index].miscEquips[k].Name, player.Index, slot, (float)Main.player[player.Index].miscEquips[k].prefix);
 				slot++;
 			}
 			for (int k = 0; k < NetItem.MiscDyeSlots; k++)
 			{
-				NetMessage.SendData(5, -1, -1, NetworkText.FromLiteral(Main.player[player.Index].miscDyes[k].Name), player.Index, slot, (float)Main.player[player.Index].miscDyes[k].prefix);
+				NetMessage.SendData(5, -1, -1, Main.player[player.Index].miscDyes[k].Name, player.Index, slot, (float)Main.player[player.Index].miscDyes[k].prefix);
 				slot++;
 			}
 			for (int k = 0; k < NetItem.PiggySlots; k++)
 			{
-				NetMessage.SendData(5, -1, -1, NetworkText.FromLiteral(Main.player[player.Index].bank.item[k].Name), player.Index, slot, (float)Main.player[player.Index].bank.item[k].prefix);
+				NetMessage.SendData(5, -1, -1, Main.player[player.Index].bank.item[k].Name, player.Index, slot, (float)Main.player[player.Index].bank.item[k].prefix);
 				slot++;
 			}
 			for (int k = 0; k < NetItem.SafeSlots; k++)
 			{
-				NetMessage.SendData(5, -1, -1, NetworkText.FromLiteral(Main.player[player.Index].bank2.item[k].Name), player.Index, slot, (float)Main.player[player.Index].bank2.item[k].prefix);
+				NetMessage.SendData(5, -1, -1, Main.player[player.Index].bank2.item[k].Name, player.Index, slot, (float)Main.player[player.Index].bank2.item[k].prefix);
 				slot++;
 			}
-			NetMessage.SendData(5, -1, -1, NetworkText.FromLiteral(Main.player[player.Index].trashItem.Name), player.Index, slot++, (float)Main.player[player.Index].trashItem.prefix);
-			for (int k = 0; k < NetItem.ForgeSlots; k++)
-			{
-				NetMessage.SendData(5, -1, -1, NetworkText.FromLiteral(Main.player[player.Index].bank3.item[k].Name), player.Index, slot, (float)Main.player[player.Index].bank3.item[k].prefix);
-				slot++;
-			}
+			NetMessage.SendData(5, -1, -1, Main.player[player.Index].trashItem.Name, player.Index, slot++, (float)Main.player[player.Index].trashItem.prefix);
+//			for (int k = 0; k < NetItem.ForgeSlots; k++)
+//			{
+//				NetMessage.SendData(5, -1, -1, Main.player[player.Index].bank3.item[k].Name, player.Index, slot, (float)Main.player[player.Index].bank3.item[k].prefix);
+//				slot++;
+//			}
 
 
-			NetMessage.SendData(4, -1, -1, NetworkText.FromLiteral(player.Name), player.Index, 0f, 0f, 0f, 0);
-			NetMessage.SendData(42, -1, -1, NetworkText.Empty, player.Index, 0f, 0f, 0f, 0);
-			NetMessage.SendData(16, -1, -1, NetworkText.Empty, player.Index, 0f, 0f, 0f, 0);
+			NetMessage.SendData(4, -1, -1, player.Name, player.Index, 0f, 0f, 0f, 0);
+			NetMessage.SendData(42, -1, -1, "", player.Index, 0f, 0f, 0f, 0);
+			NetMessage.SendData(16, -1, -1, "", player.Index, 0f, 0f, 0f, 0);
 
 			slot = 0f;
 			for (int k = 0; k < NetItem.InventorySlots; k++)
 			{
-				NetMessage.SendData(5, player.Index, -1, NetworkText.FromLiteral(Main.player[player.Index].inventory[k].Name), player.Index, slot, (float)Main.player[player.Index].inventory[k].prefix);
+				NetMessage.SendData(5, player.Index, -1, Main.player[player.Index].inventory[k].Name, player.Index, slot, (float)Main.player[player.Index].inventory[k].prefix);
 				slot++;
 			}
 			for (int k = 0; k < NetItem.ArmorSlots; k++)
 			{
-				NetMessage.SendData(5, player.Index, -1, NetworkText.FromLiteral(Main.player[player.Index].armor[k].Name), player.Index, slot, (float)Main.player[player.Index].armor[k].prefix);
+				NetMessage.SendData(5, player.Index, -1, Main.player[player.Index].armor[k].Name, player.Index, slot, (float)Main.player[player.Index].armor[k].prefix);
 				slot++;
 			}
 			for (int k = 0; k < NetItem.DyeSlots; k++)
 			{
-				NetMessage.SendData(5, player.Index, -1, NetworkText.FromLiteral(Main.player[player.Index].dye[k].Name), player.Index, slot, (float)Main.player[player.Index].dye[k].prefix);
+				NetMessage.SendData(5, player.Index, -1, Main.player[player.Index].dye[k].Name, player.Index, slot, (float)Main.player[player.Index].dye[k].prefix);
 				slot++;
 			}
 			for (int k = 0; k < NetItem.MiscEquipSlots; k++)
 			{
-				NetMessage.SendData(5, player.Index, -1, NetworkText.FromLiteral(Main.player[player.Index].miscEquips[k].Name), player.Index, slot, (float)Main.player[player.Index].miscEquips[k].prefix);
+				NetMessage.SendData(5, player.Index, -1, Main.player[player.Index].miscEquips[k].Name, player.Index, slot, (float)Main.player[player.Index].miscEquips[k].prefix);
 				slot++;
 			}
 			for (int k = 0; k < NetItem.MiscDyeSlots; k++)
 			{
-				NetMessage.SendData(5, player.Index, -1, NetworkText.FromLiteral(Main.player[player.Index].miscDyes[k].Name), player.Index, slot, (float)Main.player[player.Index].miscDyes[k].prefix);
+				NetMessage.SendData(5, player.Index, -1, Main.player[player.Index].miscDyes[k].Name, player.Index, slot, (float)Main.player[player.Index].miscDyes[k].prefix);
 				slot++;
 			}
 			for (int k = 0; k < NetItem.PiggySlots; k++)
 			{
-				NetMessage.SendData(5, player.Index, -1, NetworkText.FromLiteral(Main.player[player.Index].bank.item[k].Name), player.Index, slot, (float)Main.player[player.Index].bank.item[k].prefix);
+				NetMessage.SendData(5, player.Index, -1, Main.player[player.Index].bank.item[k].Name, player.Index, slot, (float)Main.player[player.Index].bank.item[k].prefix);
 				slot++;
 			}
 			for (int k = 0; k < NetItem.SafeSlots; k++)
 			{
-				NetMessage.SendData(5, player.Index, -1, NetworkText.FromLiteral(Main.player[player.Index].bank2.item[k].Name), player.Index, slot, (float)Main.player[player.Index].bank2.item[k].prefix);
+				NetMessage.SendData(5, player.Index, -1, Main.player[player.Index].bank2.item[k].Name, player.Index, slot, (float)Main.player[player.Index].bank2.item[k].prefix);
 				slot++;
 			}
-			NetMessage.SendData(5, player.Index, -1, NetworkText.FromLiteral(Main.player[player.Index].trashItem.Name), player.Index, slot++, (float)Main.player[player.Index].trashItem.prefix);
-			for (int k = 0; k < NetItem.ForgeSlots; k++)
-			{
-				NetMessage.SendData(5, player.Index, -1, NetworkText.FromLiteral(Main.player[player.Index].bank3.item[k].Name), player.Index, slot, (float)Main.player[player.Index].bank3.item[k].prefix);
-				slot++;
-			}
+			NetMessage.SendData(5, player.Index, -1, Main.player[player.Index].trashItem.Name, player.Index, slot++, (float)Main.player[player.Index].trashItem.prefix);
+//			for (int k = 0; k < NetItem.ForgeSlots; k++)
+//			{
+//				NetMessage.SendData(5, player.Index, -1, Main.player[player.Index].bank3.item[k].Name, player.Index, slot, (float)Main.player[player.Index].bank3.item[k].prefix);
+//				slot++;
+//			}
 
-			
 
-			NetMessage.SendData(4, player.Index, -1, NetworkText.FromLiteral(player.Name), player.Index, 0f, 0f, 0f, 0);
-			NetMessage.SendData(42, player.Index, -1, NetworkText.Empty, player.Index, 0f, 0f, 0f, 0);
-			NetMessage.SendData(16, player.Index, -1, NetworkText.Empty, player.Index, 0f, 0f, 0f, 0);
+
+			NetMessage.SendData(4, player.Index, -1, player.Name, player.Index, 0f, 0f, 0f, 0);
+			NetMessage.SendData(42, player.Index, -1, "", player.Index, 0f, 0f, 0f, 0);
+			NetMessage.SendData(16, player.Index, -1, "", player.Index, 0f, 0f, 0f, 0);
 
 			for (int k = 0; k < 22; k++)
 			{
@@ -446,13 +447,13 @@ namespace TShockAPI
 			 * This is for when players login via uuid or serverpassword instead of via
 			 * the login command.
 			 */
-			NetMessage.SendData(50, -1, -1, NetworkText.Empty, player.Index, 0f, 0f, 0f, 0);
-			NetMessage.SendData(50, player.Index, -1, NetworkText.Empty, player.Index, 0f, 0f, 0f, 0);
+			NetMessage.SendData(50, -1, -1, "", player.Index, 0f, 0f, 0f, 0);
+			NetMessage.SendData(50, player.Index, -1, "", player.Index, 0f, 0f, 0f, 0);
 
-			NetMessage.SendData(76, player.Index, -1, NetworkText.Empty, player.Index);
-			NetMessage.SendData(76, -1, -1, NetworkText.Empty, player.Index);
+			NetMessage.SendData(76, player.Index, -1, "", player.Index);
+			NetMessage.SendData(76, -1, -1, "", player.Index);
 
-			NetMessage.SendData(39, player.Index, -1, NetworkText.Empty, 400);
+			NetMessage.SendData(39, player.Index, -1, "", 400);
 		}
 	}
 }

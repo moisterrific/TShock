@@ -37,40 +37,40 @@ namespace TShockAPI.Localization
 
 		internal static void Initialize()
 		{
-			var culture = Language.ActiveCulture;
-
-			var skip = culture == GameCulture.English;
-
-			try
-			{
-				if (!skip)
-				{
-					LanguageManager.Instance.SetLanguage(GameCulture.English);
-				}
-
-				for (var i = -48; i < Main.maxItemTypes; i++)
-				{
-					ItemNames.Add(i, Lang.GetItemNameValue(i));
-				}
-
-				for (var i = -17; i < Main.maxNPCTypes; i++)
-				{
-					NpcNames.Add(i, Lang.GetNPCNameValue(i));
-				}
-
-				foreach (var field in typeof(Main).Assembly.GetType("Terraria.ID.PrefixID")
-							.GetFields().Where(f => !f.Name.Equals("Count", StringComparison.Ordinal)))
-				{
-					Prefixs.Add((int) field.GetValue(null), field.Name);
-				}
-			}
-			finally
-			{
-				if (!skip)
-				{
-					LanguageManager.Instance.SetLanguage(culture);
-				}
-			}
+//			var culture = Language.ActiveCulture;
+//
+//			var skip = culture == GameCulture.FromCultureName(GameCulture.CultureName.English);
+//
+//			try
+//			{
+//				if (!skip)
+//				{
+//					LanguageManager.Instance.SetLanguage(GameCulture.FromCultureName(GameCulture.CultureName.English));
+//				}
+//
+//				for (var i = -48; i < Main.maxItemTypes; i++)
+//				{
+//					ItemNames.Add(i, Lang.GetItemNameValue(i));
+//				}
+//
+//				for (var i = -17; i < Main.maxNPCTypes; i++)
+//				{
+//					NpcNames.Add(i, Lang.GetNPCNameValue(i));
+//				}
+//
+//				foreach (var field in typeof(Main).Assembly.GetType("Terraria.ID.PrefixID")
+//							.GetFields().Where(f => !f.Name.Equals("Count", StringComparison.Ordinal)))
+//				{
+//					Prefixs.Add((int) field.GetValue(null), field.Name);
+//				}
+//			}
+//			finally
+//			{
+//				if (!skip)
+//				{
+//					LanguageManager.Instance.SetLanguage(culture);
+//				}
+//			}
 		}
 
 		/// <summary>

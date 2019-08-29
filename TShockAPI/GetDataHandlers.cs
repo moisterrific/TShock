@@ -140,12 +140,12 @@ namespace TShockAPI
 					{ PacketTypes.KillPortal, HandleKillPortal },
 					{ PacketTypes.PlayerTeleportPortal, HandlePlayerPortalTeleport },
 					{ PacketTypes.NpcTeleportPortal, HandleNpcTeleportPortal },
-					{ PacketTypes.GemLockToggle, HandleGemLockToggle },
-					{ PacketTypes.MassWireOperation, HandleMassWireOperation },
-					{ PacketTypes.ToggleParty, HandleToggleParty },
-					{ PacketTypes.CrystalInvasionStart, HandleOldOnesArmy },
-					{ PacketTypes.PlayerHurtV2, HandlePlayerDamageV2 },
-					{ PacketTypes.PlayerDeathV2, HandlePlayerKillMeV2 }
+//					{ PacketTypes.GemLockToggle, HandleGemLockToggle },
+//					{ PacketTypes.MassWireOperation, HandleMassWireOperation },
+//					{ PacketTypes.ToggleParty, HandleToggleParty },
+//					{ PacketTypes.CrystalInvasionStart, HandleOldOnesArmy },
+//					{ PacketTypes.PlayerHurtV2, HandlePlayerDamageV2 },
+//					{ PacketTypes.PlayerDeathV2, HandlePlayerKillMeV2 }
 				};
 		}
 
@@ -215,7 +215,7 @@ namespace TShockAPI
 			PlayerInfo.Invoke(null, args);
 			return args.Handled;
 		}
-		
+
 		/// <summary>
 		/// For use in a PlayerSlot event
 		/// </summary>
@@ -264,7 +264,7 @@ namespace TShockAPI
 			PlayerSlot.Invoke(null, args);
 			return args.Handled;
 		}
-		
+
 		/// <summary>The arguments to a GetSection packet.</summary>
 		public class GetSectionEventArgs : GetDataHandledEventArgs
 		{
@@ -292,7 +292,7 @@ namespace TShockAPI
 			GetSection.Invoke(null, args);
 			return args.Handled;
 		}
-		
+
 		/// <summary>
 		/// For use in a PlayerUpdate event
 		/// </summary>
@@ -344,7 +344,7 @@ namespace TShockAPI
 			PlayerUpdate.Invoke(null, args);
 			return args.Handled;
 		}
-		
+
 		/// <summary>
 		/// For use in a PlayerHP event
 		/// </summary>
@@ -383,7 +383,7 @@ namespace TShockAPI
 			PlayerHP.Invoke(null, args);
 			return args.Handled;
 		}
-		
+
 		/// <summary>
 		/// Used when a TileEdit event is called.
 		/// </summary>
@@ -442,7 +442,7 @@ namespace TShockAPI
 			TileEdit.Invoke(null, args);
 			return args.Handled;
 		}
-		
+
 		/// <summary>
 		/// For use in a SendTileSquare event
 		/// </summary>
@@ -484,7 +484,7 @@ namespace TShockAPI
 			SendTileSquare.Invoke(null, args);
 			return args.Handled;
 		}
-		
+
 		/// <summary>
 		/// For use in an ItemDrop event
 		/// </summary>
@@ -544,7 +544,7 @@ namespace TShockAPI
 			ItemDrop.Invoke(null, args);
 			return args.Handled;
 		}
-		
+
 		/// <summary>
 		/// For use in a NewProjectile event
 		/// </summary>
@@ -608,7 +608,7 @@ namespace TShockAPI
 			NewProjectile.Invoke(null, args);
 			return args.Handled;
 		}
-		
+
 		/// <summary>
 		/// For use with a NPCStrike event
 		/// </summary>
@@ -657,7 +657,7 @@ namespace TShockAPI
 			NPCStrike.Invoke(null, args);
 			return args.Handled;
 		}
-		
+
 		/// <summary>The arguments to the ProjectileKill packet.</summary>
 		public class ProjectileKillEventArgs : GetDataHandledEventArgs
 		{
@@ -694,7 +694,7 @@ namespace TShockAPI
 			ProjectileKill.Invoke(null, args);
 			return args.Handled;
 		}
-		
+
 		/// <summary>
 		/// For use in a TogglePvp event
 		/// </summary>
@@ -728,7 +728,7 @@ namespace TShockAPI
 			TogglePvp.Invoke(null, args);
 			return args.Handled;
 		}
-		
+
 		/// <summary>
 		/// For use in a PlayerSpawn event
 		/// </summary>
@@ -767,7 +767,7 @@ namespace TShockAPI
 			PlayerSpawn.Invoke(null, args);
 			return args.Handled;
 		}
-		
+
 		/// <summary>
 		/// For use in a ChestItemChange event
 		/// </summary>
@@ -816,7 +816,7 @@ namespace TShockAPI
 			ChestItemChange.Invoke(null, args);
 			return args.Handled;
 		}
-		
+
 		/// <summary>
 		/// For use with a ChestOpen event
 		/// </summary>
@@ -850,7 +850,7 @@ namespace TShockAPI
 			ChestOpen.Invoke(null, args);
 			return args.Handled;
 		}
-		
+
 		/// <summary>
 		/// For use in a PlaceChest event
 		/// </summary>
@@ -887,7 +887,7 @@ namespace TShockAPI
 			PlaceChest.Invoke(null, args);
 			return args.Handled;
 		}
-		
+
 		/// <summary>
 		/// For use in a PlayerZone event
 		/// </summary>
@@ -936,7 +936,7 @@ namespace TShockAPI
 			PlayerZone.Invoke(null, args);
 			return args.Handled;
 		}
-		
+
 		/// <summary>
 		/// For use with a PlayerAnimation event
 		/// </summary>
@@ -958,7 +958,7 @@ namespace TShockAPI
 			PlayerAnimation.Invoke(null, args);
 			return args.Handled;
 		}
-		
+
 		/// <summary>
 		/// For use in a PlayerMana event
 		/// </summary>
@@ -988,7 +988,7 @@ namespace TShockAPI
 			PlayerMana.Invoke(null, args);
 			return args.Handled;
 		}
-		
+
 		/// <summary>
 		/// For use in a PlayerTeam event
 		/// </summary>
@@ -1022,7 +1022,7 @@ namespace TShockAPI
 			PlayerTeam.Invoke(null, args);
 			return args.Handled;
 		}
-		
+
 		/// <summary>
 		/// For use in a Sign event
 		/// </summary>
@@ -1061,7 +1061,7 @@ namespace TShockAPI
 			Sign.Invoke(null, args);
 			return args.Handled;
 		}
-		
+
 		/// <summary>
 		/// For use in a LiquidSet event
 		/// </summary>
@@ -1105,7 +1105,7 @@ namespace TShockAPI
 			LiquidSet.Invoke(null, args);
 			return args.Handled;
 		}
-		
+
 		/// <summary>
 		/// For use in a PlayerBuffUpdate event
 		/// </summary>
@@ -1207,7 +1207,7 @@ namespace TShockAPI
 			NPCAddBuff.Invoke(null, args);
 			return args.Handled;
 		}
-		
+
 		/// <summary>
 		/// For use in a PlayerBuff event
 		/// </summary>
@@ -1246,7 +1246,7 @@ namespace TShockAPI
 			PlayerBuff.Invoke(null, args);
 			return args.Handled;
 		}
-		
+
 		/// <summary>
 		/// For use in a NPCHome event
 		/// </summary>
@@ -1488,7 +1488,7 @@ namespace TShockAPI
 			PlaceObject.Invoke(null, args);
 			return args.Handled;
 		}
-		
+
 		/// <summary>For use in a PlaceTileEntity event.</summary>
 		public class PlaceTileEntityEventArgs : GetDataHandledEventArgs
 		{
@@ -1710,13 +1710,14 @@ namespace TShockAPI
 			/// </summary>
 			public bool Critical { get; set; }
 			/// <summary>The reason the player took damage and/or died.</summary>
-			public PlayerDeathReason PlayerDeathReason { get; set; }
+//			public PlayerDeathReason PlayerDeathReason { get; set; }
+			public string PlayerDeathReason { get; set; }
 		}
 		/// <summary>
 		/// PlayerDamage - Called when a player is damaged
 		/// </summary>
 		public static HandlerList<PlayerDamageEventArgs> PlayerDamage = new HandlerList<PlayerDamageEventArgs>();
-		private static bool OnPlayerDamage(TSPlayer player, MemoryStream data, byte id, byte dir, short dmg, bool pvp, bool crit, PlayerDeathReason playerDeathReason)
+		private static bool OnPlayerDamage(TSPlayer player, MemoryStream data, byte id, byte dir, short dmg, bool pvp, bool crit, string playerDeathReason)
 		{
 			if (PlayerDamage == null)
 				return false;
@@ -1758,13 +1759,13 @@ namespace TShockAPI
 			/// </summary>
 			public bool Pvp { get; set; }
 			/// <summary>The reason the player died.</summary>
-			public PlayerDeathReason PlayerDeathReason { get; set; }
+			public string PlayerDeathReason { get; set; }
 		}
 		/// <summary>
 		/// KillMe - Terraria's crappy way of handling damage from players
 		/// </summary>
 		public static HandlerList<KillMeEventArgs> KillMe = new HandlerList<KillMeEventArgs>();
-		private static bool OnKillMe(TSPlayer player, MemoryStream data, byte plr, byte direction, short damage, bool pvp, PlayerDeathReason playerDeathReason)
+		private static bool OnKillMe(TSPlayer player, MemoryStream data, byte plr, byte direction, short damage, bool pvp, string playerDeathReason)
 		{
 			if (KillMe == null)
 				return false;
@@ -1784,7 +1785,7 @@ namespace TShockAPI
 		}
 
 		#endregion
-		
+
 		private static bool HandlePlayerInfo(GetDataHandlerArgs args)
 		{
 			byte playerid = args.Data.ReadInt8();
@@ -1850,7 +1851,7 @@ namespace TShockAPI
 					args.Player.TPlayer.hideVisual[i] = hideVisual2[i];
 				args.Player.TPlayer.hideMisc = hideMisc;
 				args.Player.TPlayer.extraAccessory = extraSlot;
-				NetMessage.SendData((int)PacketTypes.PlayerInfo, -1, args.Player.Index, NetworkText.FromLiteral(args.Player.Name), args.Player.Index);
+				NetMessage.SendData((int)PacketTypes.PlayerInfo, -1, args.Player.Index, args.Player.Name, args.Player.Index);
 				return true;
 			}
 			if (TShock.Config.MediumcoreOnly && difficulty < 1)
@@ -1877,7 +1878,7 @@ namespace TShockAPI
 			short stack = args.Data.ReadInt16();
 			byte prefix = args.Data.ReadInt8();
 			short type = args.Data.ReadInt16();
-
+			;
 			// Players send a slot update packet for each inventory slot right after they've joined.
 			bool bypassTrashCanCheck = false;
 			if (plr == args.Player.Index && !args.Player.HasSentInventory && slot == NetItem.MaxInventory)
@@ -1987,7 +1988,7 @@ namespace TShockAPI
 			NetMessage.SendData((int)PacketTypes.WorldInfo, args.Player.Index);
 			return true;
 		}
-		
+
 		private static bool HandleGetSection(GetDataHandlerArgs args)
 		{
 			if (OnGetSection(args.Player, args.Data, args.Data.ReadInt32(), args.Data.ReadInt32()))
@@ -2000,10 +2001,10 @@ namespace TShockAPI
 				return true;
 			}
 
-			NetMessage.SendData((int)PacketTypes.TimeSet, -1, -1, NetworkText.Empty, Main.dayTime ? 1 : 0, (int)Main.time, Main.sunModY, Main.moonModY);
+			NetMessage.SendData((int)PacketTypes.TimeSet, -1, -1, "", Main.dayTime ? 1 : 0, (int)Main.time, Main.sunModY, Main.moonModY);
 			return false;
 		}
-		
+
 		private static bool HandleSpawn(GetDataHandlerArgs args)
 		{
 			var player = args.Data.ReadInt8();
@@ -2166,11 +2167,11 @@ namespace TShockAPI
 				}
 
 				args.TPlayer.Update(args.TPlayer.whoAmI);
-				NetMessage.SendData((int)PacketTypes.PlayerUpdate, -1, -1, NetworkText.Empty, args.Player.Index);
+				NetMessage.SendData((int)PacketTypes.PlayerUpdate, -1, -1, "", args.Player.Index);
 				return true;
 			}
 
-			NetMessage.SendData((int)PacketTypes.PlayerUpdate, -1, args.Player.Index, NetworkText.Empty, args.Player.Index);
+			NetMessage.SendData((int)PacketTypes.PlayerUpdate, -1, args.Player.Index, "", args.Player.Index);
 			return true;
 		}
 
@@ -2291,7 +2292,7 @@ namespace TShockAPI
 			if (id < 0 || id > 400)
 				return true;
 
-			if (id == 400 && owner == 255)
+			if (id == 400 && owner == 16)
 			{
 				args.Player.IgnoreSSCPackets = false;
 				return true;
@@ -2681,7 +2682,7 @@ namespace TShockAPI
 			}
 
 
-			NetMessage.SendData((int)PacketTypes.PlayerBuff, -1, args.Player.Index, NetworkText.Empty, args.Player.Index);
+			NetMessage.SendData((int)PacketTypes.PlayerBuff, -1, args.Player.Index, "", args.Player.Index);
 			return true;
 		}
 
@@ -3033,7 +3034,7 @@ namespace TShockAPI
 			if (Main.npc[npcID]?.catchItem == 0)
 			{
 				Main.npc[npcID].active = true;
-				NetMessage.SendData((int)PacketTypes.NpcUpdate, -1, -1, NetworkText.Empty, npcID);
+				NetMessage.SendData((int)PacketTypes.NpcUpdate, -1, -1, "", npcID);
 				return true;
 			}
 
@@ -3087,12 +3088,12 @@ namespace TShockAPI
 
 			// ItemBan subsystem
 
-			if (TShock.TileBans.TileIsBanned((short)TileID.LogicSensor, args.Player))
-			{
-				args.Player.SendTileSquare(x, y, 1);
-				args.Player.SendErrorMessage("You do not have permission to place Logic Sensors.");
-				return true;
-			}
+//			if (TShock.TileBans.TileIsBanned((short)TileID.LogicSensor, args.Player))
+//			{
+//				args.Player.SendTileSquare(x, y, 1);
+//				args.Player.SendErrorMessage("You do not have permission to place Logic Sensors.");
+//				return true;
+//			}
 
 			return false;
 		}
@@ -3113,7 +3114,7 @@ namespace TShockAPI
 
 			return false;
 		}
-		
+
 		private static bool HandleSyncExtraValue(GetDataHandlerArgs args)
 		{
 			var npcIndex = args.Data.ReadInt16();
@@ -3137,7 +3138,7 @@ namespace TShockAPI
 
 			return false;
 		}
-		
+
 		private static bool HandleKillPortal(GetDataHandlerArgs args)
 		{
 			short projectileIndex = args.Data.ReadInt16();
@@ -3183,13 +3184,13 @@ namespace TShockAPI
 
 			if (projectile == null || !projectile.active)
 			{
-				NetMessage.SendData((int)PacketTypes.NpcUpdate, -1, -1, NetworkText.Empty, npcIndex);
+				NetMessage.SendData((int)PacketTypes.NpcUpdate, -1, -1, "", npcIndex);
 				return true;
 			}
 
 			if (projectile.type != ProjectileID.PortalGunGate)
 			{
-				NetMessage.SendData((int)PacketTypes.NpcUpdate, -1, -1, NetworkText.Empty, npcIndex);
+				NetMessage.SendData((int)PacketTypes.NpcUpdate, -1, -1, "", npcIndex);
 				return true;
 			}
 
@@ -3258,7 +3259,7 @@ namespace TShockAPI
 		private static bool HandlePlayerDamageV2(GetDataHandlerArgs args)
 		{
 			var id = args.Data.ReadInt8();
-			PlayerDeathReason playerDeathReason = PlayerDeathReason.FromReader(new BinaryReader(args.Data));
+			var playerDeathReason = args.Data.ReadString();
 			var dmg = args.Data.ReadInt16();
 			var direction = (byte)(args.Data.ReadInt8() - 1);
 			var bits = (BitsByte)(args.Data.ReadByte());
@@ -3279,7 +3280,7 @@ namespace TShockAPI
 		private static bool HandlePlayerKillMeV2(GetDataHandlerArgs args)
 		{
 			var id = args.Data.ReadInt8();
-			PlayerDeathReason playerDeathReason = PlayerDeathReason.FromReader(new BinaryReader(args.Data));
+			string playerDeathReason = args.Data.ReadString();
 			var dmg = args.Data.ReadInt16();
 			var direction = (byte)(args.Data.ReadInt8() - 1);
 			BitsByte bits = (BitsByte)args.Data.ReadByte();

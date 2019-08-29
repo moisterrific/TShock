@@ -200,13 +200,13 @@ namespace TShockAPI
 				//return new OTAPI.Sockets.PoolSocket();
 				//return new Terraria.Net.Sockets.TcpSocket();
 			};
-			OTAPI.Hooks.Player.Announce = (int playerId) =>
-			{
-				//TShock handles this
-				return OTAPI.HookResult.Cancel;
-			};
+//			OTAPI.Hooks.Player.Announce = (int playerId) =>
+//			{
+//				//TShock handles this
+//				return OTAPI.HookResult.Cancel;
+//			};
 
-			Main.SettingsUnlock_WorldEvil = true;
+//			Main.SettingsUnlock_WorldEvil = true;
 
 			TerrariaApi.Reporting.CrashReporter.HeapshotRequesting += CrashReporter_HeapshotRequesting;
 
@@ -1221,7 +1221,7 @@ namespace TShockAPI
 		{
 			if (ShuttingDown)
 			{
-				NetMessage.SendData((int)PacketTypes.Disconnect, args.Who, -1, NetworkText.FromLiteral("Server is shutting down..."));
+				NetMessage.SendData((int)PacketTypes.Disconnect, args.Who, -1, "Server is shutting down...");
 				args.Handled = true;
 				return;
 			}
@@ -1421,21 +1421,21 @@ namespace TShockAPI
 			// Terraria now has chat commands on the client side.
 			// These commands remove the commands prefix (e.g. /me /playing) and send the command id instead
 			// In order for us to keep legacy code we must reverse this and get the prefix using the command id
-			foreach (var item in Terraria.UI.Chat.ChatManager.Commands._localizedCommands)
-			{
-				if (item.Value._name == args.CommandId._name)
-				{
-					if (!String.IsNullOrEmpty(text))
-					{
-						text = item.Key.Value + ' ' + text;
-					}
-					else
-					{
-						text = item.Key.Value;
-					}
-					break;
-				}
-			}
+//			foreach (var item in Terraria.UI.Chat.ChatManager.Commands._localizedCommands)
+//			{
+//				if (item.Value._name == args.CommandId._name)
+//				{
+//					if (!String.IsNullOrEmpty(text))
+//					{
+//						text = item.Key.Value + ' ' + text;
+//					}
+//					else
+//					{
+//						text = item.Key.Value;
+//					}
+//					break;
+//				}
+//			}
 
 			if ((text.StartsWith(Config.CommandSpecifier) || text.StartsWith(Config.CommandSilentSpecifier))
 				&& !string.IsNullOrWhiteSpace(text.Substring(1)))
@@ -1481,22 +1481,24 @@ namespace TShockAPI
 					string name = ply.name;
 					ply.name = String.Format(Config.ChatAboveHeadsFormat, tsplr.Group.Name, tsplr.Group.Prefix, tsplr.Name, tsplr.Group.Suffix);
 					//Update the player's name to format text nicely. This needs to be done because Terraria automatically formats messages against our will
-					NetMessage.SendData((int)PacketTypes.PlayerInfo, -1, -1, NetworkText.FromLiteral(ply.name), args.Who, 0, 0, 0, 0);
+					NetMessage.SendData((int)PacketTypes.PlayerInfo, -1, -1, ply.name, args.Who, 0, 0, 0, 0);
 
 					//Give that poor player their name back :'c
 					ply.name = name;
 					PlayerHooks.OnPlayerChat(tsplr, args.Text, ref text);
 
 					//This netpacket is used to send chat text from the server to clients, in this case on behalf of a client
-					Terraria.Net.NetPacket packet = Terraria.GameContent.NetModules.NetTextModule.SerializeServerMessage(
-						NetworkText.FromLiteral(text), new Color(tsplr.Group.R, tsplr.Group.G, tsplr.Group.B), (byte)args.Who
-					);
+//					Terraria.Net.NetPacket packet = Terraria.GameContent.NetModules.NetTextModule.SerializeServerMessage(
+//						NetworkText.FromLiteral(text), new Color(tsplr.Group.R, tsplr.Group.G, tsplr.Group.B), (byte)args.Who
+//					);
 					//Broadcast to everyone except the player who sent the message.
 					//This is so that we can send them the same nicely formatted message that everyone else gets
-					Terraria.Net.NetManager.Instance.Broadcast(packet, args.Who);
+//					Terraria.Net.NetManager.Instance.Broadcast(packet, args.Who);
+
+					NetMessage.SendData((int)PacketTypes.ChatText, -1, -1, text, args.Who, tsplr.Group.R, tsplr.Group.G, tsplr.Group.B);
 
 					//Reset their name
-					NetMessage.SendData((int)PacketTypes.PlayerInfo, -1, -1, NetworkText.FromLiteral(name), args.Who, 0, 0, 0, 0);
+					NetMessage.SendData((int)PacketTypes.PlayerInfo, -1, -1, name, args.Who, 0, 0, 0, 0);
 
 					string msg = String.Format("<{0}> {1}",
 						String.Format(Config.ChatAboveHeadsFormat, tsplr.Group.Name, tsplr.Group.Prefix, tsplr.Name, tsplr.Group.Suffix),
@@ -1530,7 +1532,7 @@ namespace TShockAPI
 			// Damn you ThreadStatic and Redigit
 			if (Main.rand == null)
 			{
-				Main.rand = new UnifiedRandom();
+				Main.rand = new Random((int)DateTime.Now.Ticks);
 			}
 
 			if (args.Command == "autosave")

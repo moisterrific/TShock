@@ -68,7 +68,7 @@ namespace TShockAPI
 			GetDataHandlers.PlayerDamage += OnPlayerDamage;
 			GetDataHandlers.KillMe += OnKillMe;
 		}
-		
+
 		internal void OnGetSection(object sender, GetDataHandlers.GetSectionEventArgs args)
 		{
 			if (args.Player.RequestedSection)
@@ -298,7 +298,7 @@ namespace TShockAPI
 					}
 
 					// Using the actuation accessory can lead to actuator hacking
-					if (TShock.Itembans.ItemIsBanned("Actuator", args.Player) && args.Player.TPlayer.autoActuator)
+					if (TShock.Itembans.ItemIsBanned("Actuator", args.Player))
 					{
 						args.Player.SendTileSquare(tileX, tileY, 1);
 						args.Player.SendErrorMessage("You do not have permission to place actuators.");
@@ -318,7 +318,7 @@ namespace TShockAPI
 						args.Handled = true;
 						return;
 					}
-					if (action == EditAction.PlaceTile && (editData == TileID.Containers || editData == TileID.Containers2))
+					if (action == EditAction.PlaceTile && (editData == TileID.Containers))
 					{
 						if (TShock.Utils.HasWorldReachedMaxChests())
 						{
@@ -342,10 +342,10 @@ namespace TShockAPI
 					// WireKite = The Grand Design
 					if (selectedItem.type != ItemID.Wrench
 						&& selectedItem.type != ItemID.BlueWrench
-						&& selectedItem.type != ItemID.GreenWrench
-						&& selectedItem.type != ItemID.YellowWrench
-						&& selectedItem.type != ItemID.MulticolorWrench
-						&& selectedItem.type != ItemID.WireKite)
+						&& selectedItem.type != ItemID.GreenWrench)
+//						&& selectedItem.type != ItemID.YellowWrench
+//						&& selectedItem.type != ItemID.MulticolorWrench
+//						&& selectedItem.type != ItemID.WireKite)
 					{
 						args.Player.SendTileSquare(tileX, tileY, 1);
 						args.Handled = true;
@@ -356,9 +356,9 @@ namespace TShockAPI
 					action == EditAction.KillWire2 || action == EditAction.KillWire3)
 				{
 					// If they aren't selecting the wire cutter, they're hacking.
-					if (selectedItem.type != ItemID.WireCutter
-						&& selectedItem.type != ItemID.WireKite
-						&& selectedItem.type != ItemID.MulticolorWrench)
+					if (selectedItem.type != ItemID.WireCutter)
+//						&& selectedItem.type != ItemID.WireKite
+//						&& selectedItem.type != ItemID.MulticolorWrench)
 					{
 						args.Player.SendTileSquare(tileX, tileY, 1);
 						args.Handled = true;
@@ -368,7 +368,7 @@ namespace TShockAPI
 				else if (action == EditAction.PlaceActuator)
 				{
 					// If they aren't selecting the actuator and don't have the Presserator equipped, they're hacking.
-					if (selectedItem.type != ItemID.Actuator && !args.Player.TPlayer.autoActuator)
+					if (selectedItem.type != ItemID.Actuator)
 					{
 						args.Player.SendTileSquare(tileX, tileY, 1);
 						args.Handled = true;
@@ -472,7 +472,7 @@ namespace TShockAPI
 				return;
 			}
 		}
-		
+
 		/// <summary>Bouncer's SendTileSquare hook halts large scope world destruction.</summary>
 		/// <param name="sender">The object that triggered the event.</param>
 		/// <param name="args">The packet arguments that the event has.</param>
@@ -565,11 +565,11 @@ namespace TShockAPI
 						}
 
 						// Junction Box
-						if (tile.type == TileID.WirePipe)
-						{
-							args.Handled = false;
-							return;
-						}
+//						if (tile.type == TileID.WirePipe)
+//						{
+//							args.Handled = false;
+//							return;
+//						}
 
 						// Orientable tiles
 						if (tile.type == newtile.Type && orientableTiles.Contains(tile.type))
@@ -588,8 +588,8 @@ namespace TShockAPI
 
 						// Tile entities: sensors, item frames, training dummies
 						// here it handles all tile entities listed in `TileEntityID`
-						if ((newtile.Type == TileID.LogicSensor ||
-							newtile.Type == TileID.ItemFrame ||
+//						if ((newtile.Type == TileID.LogicSensor ||
+						if ((newtile.Type == TileID.ItemFrame ||
 							newtile.Type == TileID.TargetDummy) &&
 							!Main.tile[realx, realy].active())
 						{
@@ -665,7 +665,7 @@ namespace TShockAPI
 
 			args.Handled = true;
 		}
-		
+
 		/// <summary>Registered when items fall to the ground to prevent cheating.</summary>
 		/// <param name="sender">The object that triggered the event.</param>
 		/// <param name="args">The packet arguments that the event has.</param>
@@ -757,7 +757,7 @@ namespace TShockAPI
 				return;
 			}
 		}
-		
+
 		/// <summary>Bouncer's projectile trigger hook stops world damaging projectiles from destroying the world.</summary>
 		/// <param name="sender">The object that triggered the event.</param>
 		/// <param name="args">The packet arguments that the event has.</param>
@@ -866,7 +866,7 @@ namespace TShockAPI
 				args.Player.RecentFuse = 10;
 			}
 		}
-		
+
 		/// <summary>Handles the NPC Strike event for Bouncer.</summary>
 		/// <param name="sender">The object that triggered the event.</param>
 		/// <param name="args">The packet arguments that the event has.</param>
@@ -923,7 +923,7 @@ namespace TShockAPI
 				return;
 			}
 		}
-		
+
 		/// <summary>Handles ProjectileKill events for throttling and out of bounds projectiles.</summary>
 		/// <param name="sender">The object that triggered the event.</param>
 		/// <param name="args">The packet arguments that the event has.</param>
@@ -949,7 +949,7 @@ namespace TShockAPI
 				return;
 			}
 		}
-		
+
 		/// <summary>Handles when a chest item is changed.</summary>
 		/// <param name="sender">The object that triggered the event.</param>
 		/// <param name="args">The packet arguments that the event has.</param>
@@ -986,7 +986,7 @@ namespace TShockAPI
 				return;
 			}
 		}
-		
+
 		/// <summary>The Bouncer handler for when chests are opened.</summary>
 		/// <param name="sender">The object that triggered the event.</param>
 		/// <param name="args">The packet arguments that the event has.</param>
@@ -1013,7 +1013,7 @@ namespace TShockAPI
 			int id = Chest.FindChest(args.X, args.Y);
 			args.Player.ActiveChest = id;
 		}
-		
+
 		/// <summary>The place chest event that Bouncer hooks to prevent accidental damage.</summary>
 		/// <param name="sender">The object that triggered the event.</param>
 		/// <param name="args">The packet arguments that the event has.</param>
@@ -1039,7 +1039,7 @@ namespace TShockAPI
 			if (flag != 0 && flag != 4 // if no container or container2 placement
 				&& Main.tile[tileX, tileY].type != TileID.Containers
 				&& Main.tile[tileX, tileY].type != TileID.Dressers
-				&& Main.tile[tileX, tileY].type != TileID.Containers2
+//				&& Main.tile[tileX, tileY].type != TileID.Containers2
 				&& (!TShock.Utils.HasWorldReachedMaxChests() && Main.tile[tileX, tileY].type != TileID.Dirt)) //Chest
 			{
 				args.Player.SendTileSquare(tileX, tileY, 3);
@@ -1073,7 +1073,7 @@ namespace TShockAPI
 				return;
 			}
 		}
-		
+
 		/// <summary>Handles PlayerZone events for preventing spawning NPC maliciously.</summary>
 		/// <param name="sender">The object that triggered the event.</param>
 		/// <param name="args">The packet arguments that the event has.</param>
@@ -1109,7 +1109,7 @@ namespace TShockAPI
 				}
 			}
 		}
-		
+
 		/// <summary>Handles basic animation throttling for disabled players.</summary>
 		/// <param name="sender">sender</param>
 		/// <param name="args">args</param>
@@ -1129,7 +1129,7 @@ namespace TShockAPI
 				return;
 			}
 		}
-		
+
 		/// <summary>Handles Bouncer's liquid set anti-cheat.</summary>
 		/// <param name="sender">The object that triggered the event.</param>
 		/// <param name="args">The packet arguments that the event has.</param>
@@ -1269,7 +1269,7 @@ namespace TShockAPI
 				return;
 			}
 		}
-		
+
 		/// <summary>Handles Buff events.</summary>
 		/// <param name="sender">The object that triggered the event.</param>
 		/// <param name="args">The packet arguments that the event has.</param>
@@ -1326,7 +1326,7 @@ namespace TShockAPI
 				return;
 			}
 		}
-		
+
 		/// <summary>Handles NPCAddBuff events.</summary>
 		/// <param name="sender">The object that triggered the event.</param>
 		/// <param name="args">The packet arguments that the event has.</param>
@@ -1385,7 +1385,7 @@ namespace TShockAPI
 				args.Handled = true;
 			}
 		}
-		
+
 		/// <summary>The Bouncer handler for when an NPC is rehomed.</summary>
 		/// <param name="sender">The object that triggered the event.</param>
 		/// <param name="args">The packet arguments that the event has.</param>
@@ -1412,7 +1412,7 @@ namespace TShockAPI
 				return;
 			}
 		}
-		
+
 		/// <summary>Bouncer's HealOther handler prevents gross misuse of HealOther packets by hackers.</summary>
 		/// <param name="sender">The object that triggered the event.</param>
 		/// <param name="args">The packet arguments that the event has.</param>
@@ -1454,7 +1454,7 @@ namespace TShockAPI
 			args.Handled = false;
 			return;
 		}
-		
+
 		/// <summary>Bouncer's PlaceObject hook reverts malicious tile placement.</summary>
 		/// <param name="sender">The object that triggered the event.</param>
 		/// <param name="args">The packet arguments that the event has.</param>
@@ -1487,12 +1487,12 @@ namespace TShockAPI
 
 			//style 52 and 53 are used by ItemID.Fake_newchest1 and ItemID.Fake_newchest2
 			//These two items cause localised lag and rendering issues
-			if (type == TileID.FakeContainers && (style == 52 || style == 53))
-			{
-				args.Player.SendTileSquare(x, y, 4);
-				args.Handled = true;
-				return;
-			}
+//			if (type == TileID.FakeContainers && (style == 52 || style == 53))
+//			{
+//				args.Player.SendTileSquare(x, y, 4);
+//				args.Handled = true;
+//				return;
+//			}
 
 			// TODO: REMOVE. This does NOT look like Bouncer code.
 			if (TShock.TileBans.TileIsBanned(type, args.Player))
@@ -1524,8 +1524,8 @@ namespace TShockAPI
 				return;
 			}
 
-			// This is neccessary to check in order to prevent special tiles such as 
-			// queen bee larva, paintings etc that use this packet from being placed 
+			// This is neccessary to check in order to prevent special tiles such as
+			// queen bee larva, paintings etc that use this packet from being placed
 			// without selecting the right item.
 			if (type != args.Player.TPlayer.inventory[args.Player.TPlayer.selectedItem].createTile)
 			{
@@ -1587,7 +1587,7 @@ namespace TShockAPI
 						args.Player.TilesCreated.Add(coords, Main.tile[x, y]);
 			}
 		}
-		
+
 		/// <summary>Fired when a PlaceTileEntity occurs for basic anti-cheat on perms and range.</summary>
 		/// <param name="sender">The object that triggered the event.</param>
 		/// <param name="args">The packet arguments that the event has.</param>
@@ -1611,7 +1611,7 @@ namespace TShockAPI
 				return;
 			}
 		}
-		
+
 		/// <summary>Fired when an item frame is placed for anti-cheat detection.</summary>
 		/// <param name="sender">The object that triggered the event.</param>
 		/// <param name="args">The packet arguments that the event has.</param>
@@ -1619,26 +1619,26 @@ namespace TShockAPI
 		{
 			if (args.Player.IsBeingDisabled())
 			{
-				NetMessage.SendData((int)PacketTypes.UpdateTileEntity, -1, -1, NetworkText.Empty, args.ItemFrame.ID, 0, 1);
+				NetMessage.SendData((int)PacketTypes.UpdateTileEntity, -1, -1, "", args.ItemFrame.ID, 0, 1);
 				args.Handled = true;
 				return;
 			}
 
 			if (!args.Player.HasBuildPermission(args.X, args.Y))
 			{
-				NetMessage.SendData((int)PacketTypes.UpdateTileEntity, -1, -1, NetworkText.Empty, args.ItemFrame.ID, 0, 1);
+				NetMessage.SendData((int)PacketTypes.UpdateTileEntity, -1, -1, "", args.ItemFrame.ID, 0, 1);
 				args.Handled = true;
 				return;
 			}
 
 			if (!args.Player.IsInRange(args.X, args.Y))
 			{
-				NetMessage.SendData((int)PacketTypes.UpdateTileEntity, -1, -1, NetworkText.Empty, args.ItemFrame.ID, 0, 1);
+				NetMessage.SendData((int)PacketTypes.UpdateTileEntity, -1, -1, "", args.ItemFrame.ID, 0, 1);
 				args.Handled = true;
 				return;
 			}
 		}
-		
+
 		internal void OnPlayerPortalTeleport(object sender, GetDataHandlers.TeleportThroughPortalEventArgs args)
 		{
 			//Packet 96 (player teleport through portal) has no validation on whether or not the player id provided
@@ -1666,7 +1666,7 @@ namespace TShockAPI
 				return;
 			}
 		}
-		
+
 		/// <summary>Handles the anti-cheat components of gem lock toggles.</summary>
 		/// <param name="sender">The object that triggered the event.</param>
 		/// <param name="args">The packet arguments that the event has.</param>
@@ -1696,7 +1696,7 @@ namespace TShockAPI
 				return;
 			}
 		}
-		
+
 		/// <summary>Handles validation of of basic anti-cheat on mass wire operations.</summary>
 		/// <param name="sender">The object that triggered the event.</param>
 		/// <param name="args">The packet arguments that the event has.</param>
@@ -1819,7 +1819,7 @@ namespace TShockAPI
 		{
 			short damage = args.Damage;
 			short id = args.PlayerId;
-			PlayerDeathReason playerDeathReason = args.PlayerDeathReason;
+			string playerDeathReason = args.PlayerDeathReason;
 
 			if (damage > 20000) //Abnormal values have the potential to cause infinite loops in the server.
 			{
@@ -1838,7 +1838,7 @@ namespace TShockAPI
 			// This was formerly marked as a crash check; does not actually crash on this specific packet.
 			if (playerDeathReason != null)
 			{
-				if (playerDeathReason.GetDeathText(TShock.Players[id].Name).ToString().Length > 500)
+				if (playerDeathReason.Length > 500)
 				{
 					TShock.Players[id].Kick("Death reason outside of normal bounds.", true);
 					args.Handled = true;
@@ -1846,8 +1846,8 @@ namespace TShockAPI
 				}
 			}
 		}
-		
-		
+
+
 		private static Dictionary<byte, short> NPCAddBuffTimeMax = new Dictionary<byte, short>()
 		{
 			{ BuffID.Poisoned, 3600 },
@@ -1867,13 +1867,12 @@ namespace TShockAPI
 			{ BuffID.BoneJavelin, 900 },
 			{ BuffID.StardustMinionBleed, 900 },
 			{ BuffID.DryadsWardDebuff, 120 },
-			{ BuffID.Daybreak, 300 },
-			{ BuffID.BetsysCurse, 600 },
-			{ BuffID.Oiled, 540 },
+//			{ BuffID.BetsysCurse, 600 },
+//			{ BuffID.Oiled, 540 },
 			{ BuffID.Confused, 360 }, // Brain of Confusion Internal Item ID: 3223
 			{ BuffID.Daybreak, 300 } // Solar Eruption Item ID: 3473, Daybreak Item ID: 3543
 		};
-		
+
 		/// <summary>
 		/// Tile IDs that can be oriented:
 		/// Cannon,

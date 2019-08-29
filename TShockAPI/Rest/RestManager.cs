@@ -953,7 +953,7 @@ namespace TShockAPI
 				dyes = player.TPlayer.dye.Where(i => i.active).Select(item => (NetItem)item),
 				piggy = player.TPlayer.bank.item.Where(i => i.active).Select(item => (NetItem)item),
 				safe = player.TPlayer.bank2.item.Where(i => i.active).Select(item => (NetItem)item),
-				forge = player.TPlayer.bank3.item.Where(i => i.active).Select(item => (NetItem)item)
+//				forge = player.TPlayer.bank3.item.Where(i => i.active).Select(item => (NetItem)item)
 			};
 
 			return new RestObject
