@@ -1495,7 +1495,7 @@ namespace TShockAPI
 					//This is so that we can send them the same nicely formatted message that everyone else gets
 //					Terraria.Net.NetManager.Instance.Broadcast(packet, args.Who);
 
-					NetMessage.SendData((int)PacketTypes.ChatText, -1, -1, text, args.Who, tsplr.Group.R, tsplr.Group.G, tsplr.Group.B);
+					NetMessage.SendData((int)PacketTypes.ChatText, -1, args.Who, text, args.Who, tsplr.Group.R, tsplr.Group.G, tsplr.Group.B);
 
 					//Reset their name
 					NetMessage.SendData((int)PacketTypes.PlayerInfo, -1, -1, name, args.Who, 0, 0, 0, 0);

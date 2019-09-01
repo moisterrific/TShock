@@ -905,20 +905,21 @@ namespace TShockAPI
 			/// 0 = Peace Candle, 1 = Solar Tower, 2 = Vortex Tower, 3 = Nebula Tower, 4 = Stardust Tower, 5 = Desert, 6 = Glowshroom, 7 = Underground Desert
 			/// </summary>
 			public BitsByte Zone2 { get; set; }
-			/// <summary>
-			/// 0 = Overworld, 1 = Dirt Layer, 2 = Rock Layer, 3 = Underworld, 4 = Beach, 5 = Rain, 6 = Sandstorm
-			/// </summary>
-			public BitsByte Zone3 { get; set; }
-			/// <summary>
-			/// 0 = Old One's Army
-			/// </summary>
-			public BitsByte Zone4 { get; set; }
+//			/// <summary>
+//			/// 0 = Overworld, 1 = Dirt Layer, 2 = Rock Layer, 3 = Underworld, 4 = Beach, 5 = Rain, 6 = Sandstorm
+//			/// </summary>
+//			public BitsByte Zone3 { get; set; }
+//			/// <summary>
+//			/// 0 = Old One's Army
+//			/// </summary>
+//			public BitsByte Zone4 { get; set; }
 		}
 		/// <summary>
 		/// PlayerZone - When the player sends it's zone/biome information to the server
 		/// </summary>
 		public static HandlerList<PlayerZoneEventArgs> PlayerZone = new HandlerList<PlayerZoneEventArgs>();
-		private static bool OnPlayerZone(TSPlayer player, MemoryStream data, byte plr, BitsByte zone1, BitsByte zone2, BitsByte zone3, BitsByte zone4)
+//		private static bool OnPlayerZone(TSPlayer player, MemoryStream data, byte plr, BitsByte zone1, BitsByte zone2, BitsByte zone3, BitsByte zone4)
+		private static bool OnPlayerZone(TSPlayer player, MemoryStream data, byte plr, BitsByte zone1, BitsByte zone2)
 		{
 			if (PlayerZone == null)
 				return false;
@@ -930,8 +931,8 @@ namespace TShockAPI
 				PlayerId = plr,
 				Zone1 = zone1,
 				Zone2 = zone2,
-				Zone3 = zone3,
-				Zone4 = zone4
+//				Zone3 = zone3,
+//				Zone4 = zone4
 			};
 			PlayerZone.Invoke(null, args);
 			return args.Handled;
@@ -1224,13 +1225,14 @@ namespace TShockAPI
 			/// <summary>
 			/// Time the buff lasts
 			/// </summary>
-			public int Time { get; set; }
+			public short Time { get; set; }
 		}
 		/// <summary>
 		/// PlayerBuff - Called when a player is buffed
 		/// </summary>
 		public static HandlerList<PlayerBuffEventArgs> PlayerBuff = new HandlerList<PlayerBuffEventArgs>();
-		private static bool OnPlayerBuff(TSPlayer player, MemoryStream data, byte id, byte type, int time)
+//		private static bool OnPlayerBuff(TSPlayer player, MemoryStream data, byte id, byte type, int time)
+		private static bool OnPlayerBuff(TSPlayer player, MemoryStream data, byte id, byte type, short time)
 		{
 			if (PlayerBuff == null)
 				return false;
@@ -2289,6 +2291,11 @@ namespace TShockAPI
 			var id = args.Data.ReadInt16();
 			var owner = args.Data.ReadInt8();
 
+			if (owner > 16)
+			{
+				args.Player.Kick("Not PE Client.", true, true);
+			}
+
 			if (id < 0 || id > 400)
 				return true;
 
@@ -2479,10 +2486,11 @@ namespace TShockAPI
 			var plr = args.Data.ReadInt8();
 			BitsByte zone1 = args.Data.ReadInt8();
 			BitsByte zone2 = args.Data.ReadInt8();
-			BitsByte zone3 = args.Data.ReadInt8();
-			BitsByte zone4 = args.Data.ReadInt8();
+//			BitsByte zone3 = args.Data.ReadInt8();
+//			BitsByte zone4 = args.Data.ReadInt8();
 
-			if (OnPlayerZone(args.Player, args.Data, plr, zone1, zone2, zone3, zone4))
+//			if (OnPlayerZone(args.Player, args.Data, plr, zone1, zone2, zone3, zone4))
+			if (OnPlayerZone(args.Player, args.Data, plr, zone1, zone2))
 				return true;
 
 			return false;
@@ -2726,7 +2734,8 @@ namespace TShockAPI
 		{
 			var id = args.Data.ReadInt8();
 			var type = args.Data.ReadInt8();
-			var time = args.Data.ReadInt32();
+//			var time = args.Data.ReadInt32();
+			var time = args.Data.ReadInt16();
 
 			if (OnPlayerBuff(args.Player, args.Data, id, type, time))
 				return true;
