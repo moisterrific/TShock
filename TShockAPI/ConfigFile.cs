@@ -431,7 +431,7 @@ namespace TShockAPI
 
 		/// <summary>The number of reserved slots past your max server slots that can be joined by reserved players.</summary>
 		[Description("The number of reserved slots past your max server slots that can be joined by reserved players.")]
-		public int ReservedSlots = 20;
+		public int ReservedSlots = 1;
 
 		/// <summary>Whether or not to log REST API connections.</summary>
 		[Description("Whether or not to log REST API connections.")]

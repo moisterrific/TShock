@@ -1337,6 +1337,8 @@ namespace TShockAPI
 					args.Handled = true;
 				}
 			}
+
+			NetMessage.SendData(39, player.Index, -1, "", 400);
 		}
 
 		/// <summary>OnLeave - Called when a player leaves the server.</summary>

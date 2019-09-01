@@ -1937,7 +1937,7 @@ namespace TShockAPI
 				{
 					if (args.Player.State == 1)
 						args.Player.State = 2;
-					NetMessage.SendData((int)PacketTypes.WorldInfo, args.Player.Index);
+					args.Player.SendData(PacketTypes.WorldInfo);
 
 					args.Player.PlayerData = TShock.CharacterDB.GetPlayerData(args.Player, account.ID);
 
@@ -1975,19 +1975,19 @@ namespace TShockAPI
 			else if (account != null && !TShock.Config.DisableLoginBeforeJoin)
 			{
 				args.Player.RequiresPassword = true;
-				NetMessage.SendData((int)PacketTypes.PasswordRequired, args.Player.Index);
+				args.Player.SendData(PacketTypes.PasswordRequired);
 				return true;
 			}
 			else if (!string.IsNullOrEmpty(TShock.Config.ServerPassword))
 			{
 				args.Player.RequiresPassword = true;
-				NetMessage.SendData((int)PacketTypes.PasswordRequired, args.Player.Index);
+				args.Player.SendData(PacketTypes.PasswordRequired);
 				return true;
 			}
 
 			if (args.Player.State == 1)
 				args.Player.State = 2;
-			NetMessage.SendData((int)PacketTypes.WorldInfo, args.Player.Index);
+			args.Player.SendData(PacketTypes.WorldInfo);
 			return true;
 		}
 
@@ -2516,7 +2516,7 @@ namespace TShockAPI
 
 					if (args.Player.State == 1)
 						args.Player.State = 2;
-					NetMessage.SendData((int)PacketTypes.WorldInfo, args.Player.Index);
+					args.Player.SendData(PacketTypes.WorldInfo);
 
 					var group = TShock.Groups.GetGroupByName(account.Group);
 
@@ -2561,7 +2561,7 @@ namespace TShockAPI
 					args.Player.RequiresPassword = false;
 					if (args.Player.State == 1)
 						args.Player.State = 2;
-					NetMessage.SendData((int)PacketTypes.WorldInfo, args.Player.Index);
+					args.Player.SendData(PacketTypes.WorldInfo);
 					return true;
 				}
 				args.Player.Kick("Invalid server password.", true, true);
