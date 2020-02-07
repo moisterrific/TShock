@@ -97,6 +97,8 @@ This is the rolling changelog for TShock for Terraria. Use past tense when addin
 * Add PlayerZone data handler and bouncer (@AxeelAnder)
 * Update sqlite binaries to 32bit 3.27.2 for Windows (@hakusaro)
 * Fix banned armour checks not clearing properly (thanks @tysonstrange)
+* Fixed Vortex stealth ability "flickering" bug when exiting stealth (@moisterrific)
+* Fixed false positive Brain of Confusion bouncer kicks (@moisterrific)
 
 ## TShock 4.3.25
 * Fixed a critical exploit in the Terraria protocol that could cause massive unpreventable world corruption as well as a number of other problems. Thanks to @bartico6 for reporting. Fixed by the efforts of @QuiCM, @hakusaro, and tips in the right directioon from @bartico6.
